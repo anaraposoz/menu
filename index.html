@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Letras Médias com Barra</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            min-height: 100vh;
+            background-color: #050505;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; 
+        }
+
+        .menu a {
+            position: relative;
+            text-decoration: none;
+            /* TAMANHO AJUSTADO: De 2rem para 3rem */
+            font-size: 3rem; 
+            font-weight: 900;
+            text-transform: uppercase;
+            margin: 12px 0;
+            line-height: 1.1em; 
+            letter-spacing: 6px; 
+            color: transparent;
+            -webkit-text-stroke: 1.2px #ffffff;
+            display: inline-block;
+            
+            /* Espaço lateral para a barra */
+            padding: 0 50px; 
+            transition: transform 0.4s ease;
+        }
+
+        /* BARRA VERTICAL */
+        .menu a::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 15px; 
+            width: 6px; /* Grossura média */
+            height: 75%; 
+            background-color: #00d9ff;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+            opacity: 0.8;
+            transition: left 0.75s cubic-bezier(0.45, 0, 0.55, 1), opacity 0.3s;
+            z-index: 3;
+        }
+
+        /* TEXTO QUE PREENCHE (AZUL) */
+        .menu a::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 50px; /* Alinhado com o padding-left */
+            width: 0;
+            height: 100%;
+            color: #0066ff;
+            -webkit-text-stroke: 1.2px #0066ff;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: width 0.75s cubic-bezier(0.45, 0, 0.55, 1);
+            z-index: 2;
+        }
+
+        /* --- HOVER --- */
+
+        .menu a:hover {
+            transform: translateX(12px);
+        }
+
+        .menu a:hover::after {
+            opacity: 1;
+            /* Desliza até o final do link */
+            left: calc(100% - 20px); 
+            box-shadow: 0 0 20px #00d9ff;
+        }
+
+        .menu a:hover::before {
+            width: 100%;
+        }
+
+        .menu:hover a:not(:hover) {
+            opacity: 0.25;
+            filter: blur(1px);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="menu">
+        <a href="#" data-text="HOME">HOME</a>
+        <a href="#" data-text="PROJECTS">PROJECTS</a>
+        <a href="#" data-text="SERVICES">SERVICES</a>
+        <a href="#" data-text="CONTACT">CONTACT</a>
+    </nav>
+
+</body>
+</html>
